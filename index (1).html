@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Philosophical Perspective & Power</title>
+  <style>
+    :root {
+      --ink: #161616;
+      --paper: #f6f1e8;
+      --muted: #6b6258;
+      --line: #1f1f1f;
+      --accent: #8b1e1e;
+      --soft: #e9dfcf;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 3px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 8px 0;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    header {
+      text-align: center;
+      border-bottom: 4px double var(--line);
+      padding: 22px 0 18px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 7vw, 5.9rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -0.05em;
+    }
+
+    header .subtitle {
+      margin: 12px auto 0;
+      max-width: 760px;
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 18px;
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    nav a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .breaking {
+      margin: 16px 0;
+      border: 2px solid var(--line);
+      padding: 10px 12px;
+      background: var(--soft);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .hero {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+    }
+
+    .label {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .hero h2 {
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 0.95;
+      margin: 0 0 10px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 12px;
+    }
+
+    .columns {
+      column-count: 2;
+      column-gap: 26px;
+    }
+
+    article {
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+      break-inside: avoid;
+    }
+
+    article h3 {
+      margin: 0 0 6px;
+      font-size: 1.45rem;
+      line-height: 1.1;
+    }
+
+    article p {
+      margin: 0 0 8px;
+    }
+
+    .read-more {
+      display: inline-block;
+      font-weight: bold;
+      color: var(--accent);
+      text-decoration: none;
+      background: transparent;
+      border: none;
+      padding: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1rem;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .read-more:hover {
+      text-decoration: underline;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .modal.open {
+      display: block;
+    }
+
+    .modal-content {
+      background: var(--paper);
+      color: var(--ink);
+      max-width: 820px;
+      margin: 24px auto;
+      padding: 28px;
+      border: 3px solid var(--line);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1;
+    }
+
+    .modal-close {
+      float: right;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    aside {
+      border-left: 1px solid var(--line);
+      padding-left: 18px;
+    }
+
+    .side-card {
+      border-bottom: 1px solid var(--line);
+      padding: 0 0 16px;
+      margin-bottom: 16px;
+    }
+
+    .side-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .quote {
+      font-size: 1.35rem;
+      line-height: 1.25;
+      font-style: italic;
+    }
+
+    .post-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .post-list li {
+      border-top: 1px solid var(--line);
+      padding: 9px 0;
+    }
+
+    .post-list a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .post-list a:hover {
+      color: var(--accent);
+    }
+
+    .newsletter {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 18px;
+      margin-top: 22px;
+    }
+
+    .newsletter h3 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    .subscribe-button {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      margin-top: 8px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1rem;
+    }
+
+    footer {
+      border-top: 4px double var(--line);
+      margin-top: 30px;
+      padding: 18px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 820px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        border-left: none;
+        padding-left: 0;
+      }
+
+      .columns {
+        column-count: 1;
+      }
+
+      .topline {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .modal {
+        padding: 10px;
+      }
+
+      .modal-content {
+        padding: 20px;
+        margin: 10px auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topline">
+      <span>Independent Commentary</span>
+      <span>Politics • Education • Justice • Faith • Community</span>
+      <span>May 18 Commentary • 2026</span>
+    </div>
+
+    <header>
+      <h1>The Philosophical<br />Perspective & Power</h1>
+      <p class="subtitle">Weekly reflections on politics, education, criminal justice, faith, leadership, and the systems shaping everyday life. May 18, 2026 Commentary Edition.</p>
+    </header>
+
+    <nav>
+      <a href="#politics">Politics</a>
+      <a href="#education">Education</a>
+      <a href="#justice">Criminal Justice</a>
+      <a href="#faith">Faith</a>
+      <a href="#culture">Community & Society</a>
+      <a href="#leadership">Leadership</a>
+    </nav>
+
+    <div class="breaking">Extra, Extra: Read all about it. Ideas should not just be heard. They should be examined.</div>
+
+    <main class="layout">
+      <section>
+        <div class="hero" id="politics">
+          <span class="label">Featured Reflection</span>
+          <h2>Are We Building the Very Society History Warned Us About?</h2>
+          <p class="meta">By Jamakabhubesi • Democracy, Power & Society • May 18, 2026</p>
+          <p>Summertime gave me a chance to catch up on a few series with my fiancée, and while watching <em>The Handmaid’s Tale</em> and revisiting <em>The Hunger Games</em>, I could not help but see them as more than entertainment.</p>
+          <p>Now, before somebody says, “Here we go, this sounds like conspiracy talk,” just humor me for a brief moment because the point is not that America is becoming a movie, but that stories sometimes warn us about patterns people ignore until they are already living inside them.</p>
+          <button class="read-more" data-reflection="democracy">Read the reflection</button>
+        </div>
+
+        <div class="columns">
+          <article id="education">
+            <span class="label">Education</span>
+            <h3>Education Is Not Up for Debate</h3>
+            <p class="meta">By Jama, Doctoral Scholar in Educational Administration</p>
+            <p>Education has always evolved, but the larger principle remains the same: every person deserves access to learning because a society becomes stronger when more people are taught to think, question, reason, and solve problems.</p>
+            <p>The debate should not be whether people should be educated; the real debate is how, where, when, and in what ways education should prepare people for the world they are living in.</p>
+            <button class="read-more" data-reflection="education">Read the reflection</button>
+          </article>
+
+          <article id="justice">
+            <span class="label">Criminal Justice & Human Behavior</span>
+            <h3>Should We Only Punish Crime, Or Prevent It?</h3>
+            <p class="meta">By Jama, M.C.J.</p>
+            <p>As a criminologist, the question is not simply whether punishment is fair, but whether society is truly trying to understand why harmful behavior happens in the first place and how to prevent the next victim from ever existing.</p>
+            <p>The goal is not to excuse harmful actions, but to ask harder questions about behavior, prevention, accountability, and whether systems are healing society or reacting after the damage is already done.</p>
+            <button class="read-more" data-reflection="justice">Read the reflection</button>
+          </article>
+
+          <article id="faith">
+            <span class="label">Faith, Society & Leadership</span>
+            <h3>When You Have the Anointing, But Not the Authority</h3>
+            <p class="meta">By Jamakabhubesi</p>
+            <p>The story of David and Saul in 1 Samuel shows one of the most complex places a gifted person can stand: carrying the anointing, influence, and capacity to lead while still lacking the title, office, or official authority.</p>
+            <p>David’s restraint matters because he had opportunities to harm Saul, yet chose conviction, humility, timing, and reverence over revenge, showing that true leadership is also about carrying power without being corrupted by it.</p>
+            <button class="read-more" data-reflection="faith">Read the reflection</button>
+          </article>
+
+          <article id="culture">
+            <span class="label">Community & Society</span>
+            <h3>Political Visibility Without Economic Power Is Not Enough</h3>
+            <p class="meta">By Jamakabhubesi</p>
+            <p>When you look around New Orleans, different communities are building economic motion through restaurants, stores, gas stations, construction, beauty businesses, property ownership, and service-based industries, which raises a serious question for Black communities: why are Black people so often the consumers, but not always the owners?</p>
+            <p>This is not about attacking other communities; it is about asking whether Black political visibility is translating into ownership, contracts, land, trade skills, business development, institutional power, and wealth that can be passed forward.</p>
+            <button class="read-more" data-reflection="community">Read the reflection</button>
+          </article>
+
+          <article id="leadership">
+            <span class="label">Leadership</span>
+            <h3>Authority Is Not the Same as Anointing</h3>
+            <p class="meta">By Jama, B.A. Public Administration, Doctoral Scholar in Educational Administration</p>
+            <p>A title can give a person authority, but it cannot create wisdom, humility, courage, or the spiritual weight required to lead people well.</p>
+            <button class="read-more" data-reflection="leadership">Read the reflection</button>
+          </article>
+        </div>
+      </section>
+
+      <aside>
+        <div class="side-card">
+          <h3>Editor’s Note</h3>
+          <p class="quote">“The goal is not to tell people what to think. The goal is to ask better questions about what we keep accepting.”</p>
+        </div>
+
+        <div class="side-card">
+          <h3>Latest Reflections</h3>
+          <ul class="post-list">
+            <li><button class="read-more" data-reflection="democracy">Are We Building the Very Society History Warned Us About?</button></li>
+            <li><button class="read-more" data-reflection="politics">Is Your Party Really for the People?</button></li>
+            <li><button class="read-more" data-reflection="justice">Should Society Prevent Crime Before It Happens?</button></li>
+            <li><button class="read-more" data-reflection="community">Political Visibility Without Economic Power Is Not Enough</button></li>
+            <li><button class="read-more" data-reflection="faith">When You Have the Anointing, But Not the Authority</button></li>
+          </ul>
+        </div>
+
+        <div class="side-card">
+          <h3>Categories</h3>
+          <ul class="post-list">
+            <li><a href="#politics">Politics</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#justice">Criminal Justice & Behavior</a></li>
+            <li><a href="#faith">Faith, Society & Leadership</a></li>
+            <li><a href="#culture">Community & Society</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+          </ul>
+        </div>
+
+        <div class="newsletter">
+          <h3>Join the Conversation</h3>
+          <p>Subscribe for new reflections, commentary, and questions worth wrestling with.</p>
+          <a class="subscribe-button" href="https://docs.google.com/forms/d/e/1FAIpQLSfMh4eSVjDpKA5EMJFP2NkmNXZ1ITt5sQsQz_UDLPIwLjmhyw/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer">Subscribe to the Commentary List</a>
+        </div>
+      </aside>
+    </main>
+
+    <div id="reflectionModal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="modal-close" id="closeModal">Close</button>
+        <div id="modalText"></div>
+      </div>
+    </div>
+
+    <script>
+      const reflections = {
+        democracy: `<h2>Are We Building the Very Society History Warned Us About?</h2>
+<p class="meta">By Jamakabhubesi • Democracy, Power & Society • May 18, 2026</p>
+<p>Summertime gave me a chance to catch up on a few series with my fiancée, and while watching <em>The Handmaid’s Tale</em> and revisiting <em>The Hunger Games</em>, I could not help but see them as more than entertainment.</p>
+<p>Now, before somebody says, “Here we go, this sounds like conspiracy talk,” just humor me for a brief moment. The point is not that America is becoming a movie. The point is that stories sometimes warn us about patterns people ignore until they are already living inside them.</p>
+<p>Think about <em>The Matrix</em>. Years ago, when people heard the word “agents,” they thought about men in suits chasing Neo. Today, we use the word “agents” when talking about artificial intelligence. That does not mean the movie predicted every detail of the future, but it does remind us that language, technology, power, and imagination have a way of meeting each other later.</p>
+<p>That is the way I am thinking about these shows. They make me ask what happens when power becomes too concentrated, when people are kept afraid, when everyday citizens lose economic stability, and when a small group begins making decisions that shape everybody else’s life.</p>
+<p>America was born out of resistance to monarchy, yet we are watching a society where the rich are getting richer in ways that feel closer to old systems of kings, nobles, oligarchs, and elites than the democratic promise many people were taught to believe in.</p>
+<p>Every generation in America has had its own struggle. Some faced the first settlements, westward expansion, the Revolutionary War, the Civil War, the Great Depression, world wars, and the Civil Rights Movement. The struggle of this generation may be whether democracy can survive before it becomes controlled more by corporations, class interests, and powerful individuals than by everyday people.</p>
+<p>This concern is not just a feeling. Political psychology research on democratic backsliding warns that democracy weakens when people lose shared facts, shared trust, and confidence in democratic institutions. Thomas and colleagues studied election conspiracy beliefs, authoritarian attitudes, and democratic criticism during the 2020 U.S. presidential election and the 2020 New Zealand general election, and their work helps explain why distrust, fear, and authoritarian thinking matter in moments of political stress.</p>
+<p>Legal scholars Helen Hershkoff and Luke Norris make a related point from the legal side. They argue that corporate power can shape public institutions in ways that favor the economically powerful, deepen inequality, and weaken democratic participation. That matters because democracy is not only about voting. It is also about whether ordinary people still have meaningful access to justice, opportunity, institutions, and power.</p>
+<p>So when I look at America right now, I am not just asking who won the last election. I am asking whether the structure underneath the country is still working for ordinary people. Can people afford homes? Can they access good schools? Can they get healthcare? Can they challenge powerful corporations? Can they build a life without feeling trapped?</p>
+<p>Now, to be fair, there are going to be people reading this saying, “What is he talking about? People are buying homes. People are graduating college. People are traveling. People have jobs, healthcare, and opportunities.” And honestly, for many people, especially within their own social circles, that is true.</p>
+<p>But part of the challenge in America is that people often judge the health of the country based on the environments they personally experience every day. If everybody around you is relatively stable, educated, employed, and upwardly mobile, it becomes easier to believe the system is still broadly working for most people.</p>
+<p>What is sometimes harder to see is that many families are still standing on generations of accumulated stability: homeownership, educational access, financial literacy, professional networks, safer neighborhoods, inherited expectations, and economic cushions that make hardship easier to survive. That does not mean people did not work hard. Many absolutely did. But it does mean everybody did not begin from the same starting point.</p>
+<p>At the same time, there are millions of people, including college graduates, who are quietly struggling just to remain stable. People with degrees are carrying student loan debt, rising housing costs, healthcare expenses, and economic pressures while still trying to build something for the next generation. Many are surviving, but not necessarily building long-term wealth or security.</p>
+<p>That is the deeper concern. A democracy does not become unhealthy only when everybody is failing. Sometimes the warning signs appear when success becomes increasingly concentrated while large portions of the population feel locked out of meaningful stability, ownership, mobility, or influence.</p>
+<p>America historically created upward mobility for many immigrant communities by creating real pathways into land ownership, education, skilled labor, military advancement, infrastructure jobs, public investment, and business opportunity. That is part of the American story. The concern now is whether society still believes in creating real opportunity broadly, or whether opportunity is slowly becoming something inherited more than built.</p>
+<p>A government of the people, by the people, and for the people cannot survive if wealth increasingly buys access, influence, protection, and comfort while millions of people feel locked out of meaningful participation in the future of the country.</p>
+<p>If America wants a stronger future, society has to replace fear and misunderstanding with education, truth, unity, and real opportunity, not simply the language of opportunity. Real opportunity means pathways that allow ordinary people to build stable lives, develop skills, own homes, raise families, access healthcare, create businesses, and pass something better to the next generation.</p>
+<p>Otherwise, we may look around one day and realize we slowly created the very kind of divided society that history, fiction, and scholarship have been warning us about.</p>
+<p><strong>Sources behind this reflection:</strong> Thomas et al. (2025), <em>Political Psychology</em>; Hershkoff & Norris (2023), <em>Michigan Law Review</em>.</p>`,
+
+        politics: `<h2>Is Your Party Really for the People?</h2>
+<p class="meta">By Jamakabhubesi • Political Commentary • May 18, 2026</p>
+<p>Both parties say they are for the people, but the real test is what they do with power.</p>
+<p>Republicans have pushed stricter immigration enforcement, anti-DEI laws, parental rights legislation, tax-cut policies, and a political culture increasingly centered around Donald Trump and populist nationalism.</p>
+<p>Democrats have supported healthcare access, student loan relief, infrastructure spending, LGBTQ+ protections, racial equity initiatives, and policies that tax large corporations while still operating within capitalism.</p>
+<p>The deeper question is whether either party is truly fighting for ordinary people, or whether Americans are being pushed into fear-based camps while wealth, influence, and power keep concentrating at the top.</p>`,
+
+        education: `<h2>Education Is Not Up for Debate</h2>
+<p class="meta">By Jama, Doctoral Scholar in Educational Administration</p>
+<p>Education has always evolved, but the larger principle remains the same: every person deserves access to learning because a society becomes stronger when more people are taught to think, question, reason, and solve problems.</p>
+<p>For much of human history, only a small group of people had real access to formal education, knowledge, and critical thought, and societies reflected that imbalance by concentrating power and decision-making in the hands of the few.</p>
+<p>The debate should not be whether people should be educated. Everybody should be educated. The real debate is how, where, when, and in what ways education should prepare people for the world they are living in.</p>
+<p>When people are denied education, they are more easily pushed into reaction, ignorance, fear, manipulation, and unexamined behavior. When they are educated well, they are invited into their fuller intellectual, moral, spiritual, and human capacity.</p>`,
+
+        justice: `<h2>Should We Only Punish Crime, Or Prevent It?</h2>
+<p class="meta">By Jama, M.C.J.</p>
+<p>As a criminologist, the question is not simply whether punishment is fair, but whether society is truly trying to understand why harmful behavior happens in the first place and how to prevent the next victim from ever existing.</p>
+<p>The goal is not to excuse murder, rape, robbery, theft, exploitation, or white-collar crime. The goal is to prevent harm before another person is damaged.</p>
+<p>Some people prefer a quick answer: lock people away and forget about them. But if society never studies the patterns, conditions, selfishness, trauma, poverty, greed, opportunity gaps, and social environments that shape behavior, then the next victim still appears.</p>
+<p>Criminology requires harder questions. Why do people behave the way they do? Can behavior be predicted or deterred? Are some responses rooted in justice, or are they rooted in fear, anger, and mob thinking?</p>
+<p>Jesus challenged the crowd in John 8 by saying, “He who is without sin among you, let him throw a stone at her first.” That does not erase accountability, but it forces reflection before condemnation.</p>
+<p>The work is to understand behavior, expose harm, hold people accountable, and build systems that prevent damage rather than only reacting after lives have already been broken.</p>`,
+
+        faith: `<h2>When You Have the Anointing, But Not the Authority</h2>
+<p class="meta">By Jamakabhubesi • Faith, Society & Leadership</p>
+<p>The story of David and Saul in 1 Samuel shows one of the most complex places a gifted person can stand: carrying the anointing, influence, and capacity to lead while still lacking the title, office, or official authority.</p>
+<p>Saul had the throne, but David had the gift, and that gift frightened the power structure because David was not trying to destroy Saul. He was willing to fight for the very leader who saw him as a threat.</p>
+<p>That kind of place can be confusing. A person can have influence without authority, gifting without placement, and calling without the seat. That tension can make people question whether they truly have influence at all.</p>
+<p>David had opportunities to harm Saul, yet chose conviction, humility, timing, and reverence over revenge. He showed that true leadership is not only about power, but about whether a person can carry power without being corrupted by it.</p>
+<p>Leadership preparation requires restraint, patience, humility, and love almost to a fault, because to whom much is given, much is required.</p>`,
+
+        community: `<h2>Political Visibility Without Economic Power Is Not Enough</h2>
+<p class="meta">By Jamakabhubesi • Community & Society</p>
+<p>When you look around New Orleans, you can see different communities building economic motion. Latino and Spanish-speaking communities are visible through food trucks, grocery stores, construction work, cleaning companies, and service-based businesses.</p>
+<p>Vietnamese families and other immigrant communities have operated beauty supply stores, nail shops, restaurants, and retail businesses. Middle Eastern, South Asian, and Muslim immigrant communities have built economic presence through gas stations, corner stores, convenience stores, and service-based businesses.</p>
+<p>In many white neighborhoods, the economic infrastructure is even more visible: banks, restaurants, grocery stores, gas stations, property ownership, and commercial corridors.</p>
+<p>That raises a serious question for Black communities: why are Black people so often the consumers, but not always the owners?</p>
+<p>This is not about attacking other communities. People have the right to work, build, and create opportunity. The issue is that Black people must also think intentionally about ownership, circulation of dollars, skills, land, business development, and political accountability.</p>
+<p>Dr. Claud Anderson’s <em>PowerNomics</em> argued that political visibility is not enough if it does not translate into group economics, institutional power, business ownership, and community control.</p>
+<p>History matters here. Black communities have built before, and many times when they became economically independent, they were attacked, restricted, displaced, or denied access to capital. Greenwood in Tulsa, often called Black Wall Street, is one of the clearest examples.</p>
+<p>Representation matters, but representation without an economic agenda does not transform a community. In majority-Black districts, leadership should be measured by whether it expands ownership, strengthens local businesses, increases access to contracts, supports trade certification, improves schools, protects land, and builds long-term community wealth.</p>
+<p>Other communities are showing what coordinated economic movement looks like. Black communities can do the same, but it requires discipline, organization, trust, ownership, and leadership that is strategic, not merely symbolic.</p>`,
+
+        leadership: `<h2>Authority Is Not the Same as Anointing</h2>
+<p class="meta">By Jama, B.A. Public Administration, Doctoral Scholar in Educational Administration</p>
+<p>A title can give a person authority, but it cannot create wisdom, humility, courage, or the spiritual weight required to lead people well.</p>
+<p>Leadership is not just possession of a seat. It is stewardship, discipline, accountability, restraint, vision, and the ability to serve people without being consumed by ego or insecurity.</p>`
+      };
+
+      const modal = document.getElementById('reflectionModal');
+      const modalText = document.getElementById('modalText');
+      const closeModal = document.getElementById('closeModal');
+
+      document.querySelectorAll('[data-reflection]').forEach(button => {
+        button.addEventListener('click', () => {
+          const key = button.getAttribute('data-reflection');
+          modalText.innerHTML = reflections[key] || '<p>Reflection coming soon.</p>';
+          modal.classList.add('open');
+          modal.setAttribute('aria-hidden', 'false');
+        });
+      });
+
+      closeModal.addEventListener('click', () => {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      });
+
+      modal.addEventListener('click', event => {
+        if (event.target === modal) {
+          modal.classList.remove('open');
+          modal.setAttribute('aria-hidden', 'true');
+        }
+      });
+    </script>
+
+    <footer>
+      <p>© 2026 The Philosophical Perspective & Power. Built for thoughtful commentary, civic reflection, and public conversation.</p>
+    </footer>
+  </div>
+</body>
+</html>
